@@ -1,127 +1,63 @@
 # Support Escalation Agent
 
-AI-powered customer support agent with intelligent escalation. Handles tier-1 support, knows its limits, and escalates to humans with full context when confidence is low.
+Multi-agent customer support system with specialist routing, RAG-enhanced responses, and intelligent escalation. Routes tickets to domain experts (billing, technical, account), retrieves relevant knowledge base content, and escalates to humans when confidence is low.
 
 ## Features
 
-- **Intent Classification**: Automatically categorizes tickets (billing, technical, account, etc.)
-- **Confidence Scoring**: Multi-signal confidence calculation to determine when to escalate
-- **Graceful Escalation**: Never dead-ends customers; always hands off with full context
-- **Conversation Tracking**: Maintains full conversation history per ticket
-- **Analytics**: Track auto-resolution rates, confidence scores, and escalation patterns
+- **Multi-Agent Routing**: Automatically routes tickets to specialist agents based on intent
+- **Specialist Agents**: Billing, Technical, and Account agents with domain-specific prompts
+- **RAG Integration**: ChromaDB vector store with FAQ content enhances agent responses
+- **Intent Classification**: Claude Haiku-based classification into 12 categories
+- **Confidence Scoring**: Multi-signal scoring (intent clarity, response certainty, sentiment, complexity)
+- **Graceful Escalation**: Context packaging with suggested actions for human agents
+- **Conversation Tracking**: Full history per ticket with SQLite persistence
+- **Analytics**: Resolution rates, confidence scores, routing distribution
 
 ## Quick Start
 
-### 1. Install dependencies
-
-```bash
-pip install -e .
-```
-
-### 2. Set up environment
-
-```bash
-cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY
-```
-
-### 3. Run the server
-
-```bash
-python run.py
-```
-
-Server starts at `http://localhost:8000`
+1. Install: `pip install -e .`
+2. Configure: `cp .env.example .env` and add ANTHROPIC_API_KEY
+3. Seed KB: `python scripts/seed_knowledge_base.py`
+4. Run: `python run.py` (starts at http://localhost:8000)
 
 ## API Endpoints
 
-### Create Ticket
-```bash
-curl -X POST http://localhost:8000/tickets \
-  -H "Content-Type: application/json" \
-  -d '{
-    "source": "api",
-    "customer_id": "cust_123",
-    "subject": "Cannot log in to my account",
-    "body": "I have been trying to log in but keep getting an error message."
-  }'
-```
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| /tickets | POST | Create ticket, get AI response |
+| /tickets/{id} | GET | Get ticket with conversation history |
+| /tickets/{id}/message | POST | Send follow-up message |
+| /tickets/{id}/escalate | POST | Force escalation to human |
+| /tickets/{id}/resolve | POST | Mark ticket resolved |
+| /analytics/summary | GET | Get system metrics |
+| /knowledge/stats | GET | Knowledge base statistics |
 
-### Send Follow-up Message
-```bash
-curl -X POST http://localhost:8000/tickets/{ticket_id}/message \
-  -H "Content-Type: application/json" \
-  -d '{"content": "I tried that but it still does not work"}'
-```
+## Specialist Agents
 
-### Get Ticket Details
-```bash
-curl http://localhost:8000/tickets/{ticket_id}
-```
-
-### View Analytics
-```bash
-curl http://localhost:8000/analytics/summary
-```
-
-## Architecture
-
-```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│  Ticket Parser  │────▶│  Intent Router  │────▶│  Support Agent  │
-└─────────────────┘     └─────────────────┘     └────────┬────────┘
-                                                         │
-                                                         ▼
-                                              ┌─────────────────────┐
-                                              │  Confidence Scorer  │
-                                              └──────────┬──────────┘
-                                                         │
-                                          ┌──────────────┴──────────────┐
-                                          ▼                             ▼
-                                    [Auto-respond]               [Escalate]
-```
-
-## Project Structure
-
-```
-support-escalation-agent/
-├── src/
-│   ├── agents/
-│   │   └── support_agent.py    # Main agent logic
-│   ├── api/
-│   │   └── main.py             # FastAPI application
-│   ├── models/
-│   │   ├── database.py         # SQLAlchemy models
-│   │   └── ticket.py           # Pydantic models
-│   └── services/
-│       ├── confidence_scorer.py
-│       └── intent_classifier.py
-├── tests/
-├── DESIGN.md                   # Full technical design
-├── pyproject.toml
-└── run.py
-```
+| Agent | Handles | Auto-Escalates On |
+|-------|---------|-------------------|
+| Billing | Charges, refunds, subscriptions | Fraud, legal threats, chargebacks |
+| Technical | Bugs, how-to, features | Data loss, security issues, outages |
+| Account | Login, 2FA, deletion | Hacked accounts, GDPR, legal requests |
 
 ## Confidence Scoring
 
-The agent uses multiple signals to determine confidence:
+| Signal | Weight |
+|--------|--------|
+| Intent Clarity | 25% |
+| Response Certainty | 35% |
+| Sentiment Risk | 20% |
+| Complexity | 20% |
 
-| Signal | Weight | Description |
-|--------|--------|-------------|
-| Intent Clarity | 25% | How clearly the ticket maps to a known category |
-| Response Certainty | 35% | Language uncertainty markers in generated response |
-| Sentiment Risk | 20% | Negative sentiment increases escalation likelihood |
-| Complexity | 20% | Multi-part questions reduce confidence |
+Thresholds: >=0.85 auto-respond | 0.70-0.85 respond with caveat | <0.70 escalate
 
-**Thresholds:**
-- ≥ 0.85: Auto-respond
-- 0.70-0.85: Respond with caveat
-- < 0.70: Escalate to human
+## Known Issues (TODO)
 
-## Next Steps (Phase 2+)
+- [ ] RAG retrieval not fully wired to specialist agents
+- [ ] Phase 2 tests incomplete  
+- [ ] Feedback loop not implemented
+- [ ] No human dashboard UI
 
-- [ ] Specialist agents (billing, technical, account)
-- [ ] RAG integration with knowledge base
-- [ ] Feedback loop for continuous learning
-- [ ] Human dashboard for escalated tickets
-- [ ] Multi-channel ingestion (email, Slack)
+## Tech Stack
+
+FastAPI | Claude (Haiku + Sonnet) | ChromaDB | SQLite | sentence-transformers
