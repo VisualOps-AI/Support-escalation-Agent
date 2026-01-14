@@ -1,0 +1,42 @@
+[
+  {
+    "question": "The app keeps crashing when I try to upload files",
+    "answer": "File upload crashes are usually caused by: 1) Files exceeding the 100MB limit - try compressing or splitting large files. 2) Unsupported file formats - we support PDF, DOC, DOCX, XLS, XLSX, PNG, JPG, and GIF. 3) Browser cache issues - try clearing your cache or using incognito mode. 4) Browser extensions - disable ad blockers temporarily. If the issue persists, try a different browser.",
+    "category": "technical"
+  },
+  {
+    "question": "How do I export my data?",
+    "answer": "To export your data: Go to Settings > Data > Export. Select the data types you want to export (projects, files, settings). Choose your format (JSON for programmatic use, CSV for spreadsheets). Click 'Start Export' - you'll receive an email with a download link when ready. Large exports may take up to 24 hours.",
+    "category": "technical"
+  },
+  {
+    "question": "Why is the app running slowly?",
+    "answer": "Slow performance can be caused by: 1) Too many browser tabs - close unused tabs. 2) Large project files - archive old projects. 3) Browser cache - clear cache and cookies. 4) Internet connection - test your connection speed. 5) Extensions - disable browser extensions temporarily. If you're on a team plan, check if teammates are running heavy operations.",
+    "category": "technical"
+  },
+  {
+    "question": "How do I integrate with Slack?",
+    "answer": "To set up Slack integration: 1) Go to Settings > Integrations > Slack. 2) Click 'Connect to Slack' and authorize the app. 3) Select which channels to receive notifications. 4) Configure notification preferences (all updates, mentions only, or daily digest). You can customize notifications per project in Project Settings.",
+    "category": "technical"
+  },
+  {
+    "question": "The search feature is not returning results",
+    "answer": "If search isn't working: 1) Wait a few minutes - new content takes time to index. 2) Check your search filters - you might have filters hiding results. 3) Try simpler search terms - use keywords rather than full sentences. 4) Clear browser cache and refresh. Search indexes update every 5 minutes; recently added content may not appear immediately.",
+    "category": "technical"
+  },
+  {
+    "question": "How do I use the API?",
+    "answer": "To get started with our API: 1) Generate an API key in Settings > Developer > API Keys. 2) Read our API documentation at docs.example.com/api. 3) Use your API key in the Authorization header: 'Authorization: Bearer YOUR_API_KEY'. Rate limits: 100 requests/minute for standard plans, 1000/minute for enterprise. All API responses are JSON formatted.",
+    "category": "technical"
+  },
+  {
+    "question": "Why are my notifications not working?",
+    "answer": "Notification issues are usually caused by: 1) Browser permissions - check that notifications are enabled for our site. 2) Email filters - check spam/promotions folders. 3) Notification settings - verify your preferences in Settings > Notifications. 4) Do Not Disturb mode - check your system settings. For mobile, ensure the app has notification permissions in your device settings.",
+    "category": "technical"
+  },
+  {
+    "question": "How do I share a project with external users?",
+    "answer": "To share with external users: 1) Open the project and click 'Share'. 2) Toggle 'Allow external access'. 3) Set permissions (view only, comment, or edit). 4) Copy the share link or enter email addresses. External users can access without creating an account for view-only links. For editing access, they'll need to create a free account.",
+    "category": "technical"
+  }
+]

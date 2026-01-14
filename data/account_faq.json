@@ -1,0 +1,42 @@
+[
+  {
+    "question": "I forgot my password, how do I reset it?",
+    "answer": "To reset your password: 1) Go to the login page and click 'Forgot Password'. 2) Enter your account email address. 3) Check your email for the reset link (check spam if not in inbox). 4) Click the link and create a new password. Links expire after 1 hour. If you don't receive the email, verify you're using the correct email address associated with your account.",
+    "category": "account"
+  },
+  {
+    "question": "How do I enable two-factor authentication?",
+    "answer": "To enable 2FA: 1) Go to Settings > Security > Two-Factor Authentication. 2) Click 'Enable 2FA'. 3) Scan the QR code with an authenticator app (Google Authenticator, Authy, etc.). 4) Enter the 6-digit code to verify. 5) Save your backup codes in a secure location. We strongly recommend enabling 2FA for account security.",
+    "category": "account"
+  },
+  {
+    "question": "I'm locked out of my account with 2FA",
+    "answer": "If you're locked out with 2FA enabled: 1) Try your backup codes - you saved these when enabling 2FA. 2) If no backup codes, click 'Lost access to authenticator' on the login page. 3) You'll need to verify your identity through email + additional verification. 4) For immediate assistance, contact support with your account email and last 4 digits of your payment method.",
+    "category": "account"
+  },
+  {
+    "question": "How do I change my email address?",
+    "answer": "To change your email: 1) Go to Settings > Account > Email. 2) Enter your new email address. 3) Enter your password to confirm. 4) Check your new email for a verification link. 5) Click the link to confirm the change. Your old email will receive a notification about the change for security purposes.",
+    "category": "account"
+  },
+  {
+    "question": "How do I delete my account?",
+    "answer": "To delete your account: 1) Go to Settings > Account > Delete Account. 2) Review what will be deleted (all data, projects, history). 3) Export any data you want to keep before deletion. 4) Enter your password and type 'DELETE' to confirm. Account deletion is permanent and cannot be undone. Allow 30 days for complete data removal from backups.",
+    "category": "account"
+  },
+  {
+    "question": "How do I add team members to my account?",
+    "answer": "To add team members: 1) Go to Settings > Team > Invite Members. 2) Enter email addresses (comma-separated for multiple). 3) Select their role (Admin, Editor, or Viewer). 4) Click 'Send Invites'. Invitees will receive an email to join. You can manage pending invites and revoke access anytime from the Team settings page.",
+    "category": "account"
+  },
+  {
+    "question": "Why am I seeing 'session expired' messages?",
+    "answer": "Session expiration happens for security: 1) Sessions expire after 7 days of inactivity. 2) Password changes invalidate all sessions. 3) Multiple device logins may trigger re-authentication. 4) Browser privacy settings may clear session data. Enable 'Remember me' at login for longer sessions. If this happens frequently, check your browser's cookie settings.",
+    "category": "account"
+  },
+  {
+    "question": "How do I transfer ownership of my account?",
+    "answer": "Account ownership can be transferred for business accounts: 1) Both parties must be on the same organization. 2) Go to Settings > Organization > Transfer Ownership. 3) Select the new owner from team members. 4) Both parties must confirm via email. Personal accounts cannot be transferred - create a new account for the new user instead.",
+    "category": "account"
+  }
+]
